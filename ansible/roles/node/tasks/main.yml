@@ -1,0 +1,12 @@
+---
+- name: install node version management
+  become: true
+  get_url:
+    url: https://raw.githubusercontent.com/tj/n/bb930ea7b4e50b189c166e2d69482e4452197b9c/bin/n
+    dest: /usr/local/bin/n
+    checksum: sha256:71ec422d20406353613846b77c666440f8f2d11e2e96527f3775fbdb31e9270e
+    mode: '0777'
+
+- name: switch to LTS node version
+  become: true
+  command: /bin/bash -c "n lts"
