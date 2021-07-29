@@ -1,0 +1,4 @@
+---
+- name: Retrive updated env
+  become: true
+  command: /usr/bin/get_env.sh

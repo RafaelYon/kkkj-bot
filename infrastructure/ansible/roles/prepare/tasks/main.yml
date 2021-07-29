@@ -1,9 +1,23 @@
 ---
+- name: Install aws cli
+  become: true
+  apt:
+    name: awscli
+    update_cache: true
+
 - name: Install jq
   become: true
   apt:
     name: jq
-    update_cache: true
+
+- name: Send get_env.sh
+  become: true
+  copy:
+    src: ./roles/prepare/files/get_env.sh
+    dest: /usr/bin/get_env.sh
+    owner: root
+    group: root
+    mode: '0775'
   
 - name: Send download_release.sh
   become: true
