@@ -12,6 +12,7 @@ type DevSaver interface {
 
 type DevRetriver interface {
 	Get(name string) (*domain.Dev, error)
+	GetAll() []*domain.Dev
 }
 
 type DevSaveRetriver interface {
@@ -29,6 +30,14 @@ func (d *Dev) Get(name string) (*domain.Dev, error) {
 	} else {
 		return dev, nil
 	}
+}
+
+func (d *Dev) GetAll() (result []*domain.Dev) {
+	for _, v := range d.devs {
+		result = append(result, v)
+	}
+
+	return
 }
 
 func (d *Dev) Save(dev *domain.Dev) error {
