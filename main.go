@@ -79,6 +79,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		command.PrintPoints(s, m, devRepository)
 	}
 
+	if strings.HasPrefix(m.Content, ";oh dad") {
+		s.ChannelMessageSend(m.ChannelID, "STOP 👉👈")
+	}
+
 	// If the message is "pong" reply with "Ping!"
 	if m.Content == "pong" {
 		s.ChannelMessageSend(m.ChannelID, "Ping!")
