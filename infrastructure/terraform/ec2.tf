@@ -4,6 +4,16 @@ resource "aws_iam_role" "ec2" {
   force_detach_policies = true
 }
 
+resource "aws_iam_role_policy" "ec2" {
+  role = aws_iam_role.ec2.id
+
+  policy = templatefile("${path.module}/iam/EC2Policy.json", {
+    aws_region  = var.aws_region
+    aws_account = data.aws_caller_identity.current.account_id
+    app_name    = var.app_name
+  })
+}
+
 resource "aws_iam_instance_profile" "ec2" {
   name_prefix = var.app_name
   role        = aws_iam_role.ec2.name
