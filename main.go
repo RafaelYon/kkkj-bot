@@ -8,6 +8,7 @@ import (
 
 	"strings"
 
+	"github.com/RafaelYon/kkkj-bot/repository"
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
 )
@@ -22,6 +23,9 @@ func LoadEnv() {
 
 func main() {
 	LoadEnv()
+
+	devRepository := &repository.Dev{}
+
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
 	if err != nil {

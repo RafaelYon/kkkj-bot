@@ -1,5 +1,7 @@
 package command
 
-func ContabilizePoints(message string) {
+import "github.com/RafaelYon/kkkj-bot/repository"
 
+func ContabilizePoints(message string, devRepository repository.DevSaveRetriver) {
+	// devRepository.Get("name")
 }
