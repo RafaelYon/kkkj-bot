@@ -14,9 +14,9 @@ import (
 
 func LoadEnv() {
 	fmt.Println("Carregando env")
-	err := godotenv.Load()
-	if err != nil {
-		fmt.Print(err)
+	if err := godotenv.Load(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 }
 
@@ -26,7 +26,7 @@ func main() {
 	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
 	if err != nil {
 		fmt.Println("error creating Discord session,", err)
-		return
+		os.Exit(1)
 	}
 
 	// Register the messageCreate func as a callback for MessageCreate events.
@@ -36,10 +36,9 @@ func main() {
 	dg.Identify.Intents = discordgo.IntentsGuildMessages
 
 	// Open a websocket connection to Discord and begin listening.
-	err = dg.Open()
-	if err != nil {
+	if err = dg.Open(); err != nil {
 		fmt.Println("error opening connection,", err)
-		return
+		os.Exit(1)
 	}
 
 	// Wait here until CTRL-C or other term signal is received.
