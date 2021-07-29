@@ -2,4 +2,4 @@
 - hosts: kkkj-bot
   remote_user: ubuntu
   roles:
-    - node
+    - deploy
