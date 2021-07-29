@@ -73,7 +73,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if strings.HasPrefix(m.Content, ";points") {
 		command.ContabilizePoints(m.Content, devRepository)
 		command.PrintPoints(s, m, devRepository)
+	}
 
+	if strings.HasPrefix(m.Content, ";poll") {
+		command.PrintPoints(s, m, devRepository)
 	}
 
 	// If the message is "pong" reply with "Ping!"

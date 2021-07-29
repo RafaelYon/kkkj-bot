@@ -8,13 +8,13 @@ import (
 )
 
 func PrintPoints(s *discordgo.Session, m *discordgo.MessageCreate, devRepository *repository.Dev) {
-	template := "[\n"
+	template := "```[\n"
 
 	for _, v := range devRepository.GetAll() {
 		template += v.Name + " => " + strconv.Itoa(v.Amount) + "\n"
 	}
 
-	template += "\n]"
+	template += "]```"
 
 	s.ChannelMessageSend(m.ChannelID, template)
 }
