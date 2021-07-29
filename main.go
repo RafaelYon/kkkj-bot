@@ -72,6 +72,8 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	// If the message is "ping" reply with "Pong!"
 	if strings.HasPrefix(m.Content, ";points") {
 		command.ContabilizePoints(m.Content, devRepository)
+		command.PrintPoints(s, m, devRepository)
+
 	}
 
 	// If the message is "pong" reply with "Ping!"
