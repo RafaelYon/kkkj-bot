@@ -1,0 +1,15 @@
+---
+- name: Install jq
+  become: true
+  apt:
+    name: jq
+    update_cache: true
+  
+- name: Send download_release.sh
+  become: true
+  copy:
+    src: ./roles/prepare/files/download_release.sh
+    dest: /usr/bin/download_release.sh
+    owner: root
+    group: root
+    mode: '0775'

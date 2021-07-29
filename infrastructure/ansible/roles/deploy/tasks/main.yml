@@ -1,27 +1,4 @@
 ---
-- name: src files
+- name: Get Lastest executable
   become: true
-  copy:
-    src: ../src
-    dest: /home/bot/kkk-j
-    owner: bot
-    group: bot
-    mode: '0770'
-
-- name: send package.json
-  become: true
-  copy:
-    src: ../package.json
-    dest: /home/bot/kkk-j/package.json
-    owner: bot
-    group: bot
-    mode: '0660'
-
-- name: send package-lock.json
-  become: true
-  copy:
-    src: ../package-lock.json
-    dest: /home/bot/kkk-j/package-lock.json
-    owner: bot
-    group: bot
-    mode: '0660'
+  command: /usr/bin/download_release.sh
