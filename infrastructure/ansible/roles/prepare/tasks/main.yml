@@ -13,3 +13,20 @@
     owner: root
     group: root
     mode: '0775'
+
+- name: Send systemctl unit file
+  become: true
+  copy:
+    src: ./roles/prepare/files/kkkjbot.service
+    dest: /etc/systemd/system/kkkjbot.service
+    owner: root
+    group: root
+    mode: '0774'
+
+- name: Reload systemd units
+  become: true
+  command: systemctl daemon-reload
+
+- name: Enable systemd kkkjbot.service
+  become: true
+  command: systemctl enable kkkjbot.service

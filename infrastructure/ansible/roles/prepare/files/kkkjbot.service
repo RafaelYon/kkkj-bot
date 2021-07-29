@@ -1,0 +1,9 @@
+[Unit]
+Description=kkkj Discord Bot
+
+[Service]
+User=bot
+WorkingDirectory=/home/bot/kkkj
+ExecStart=/home/bot/kkkj/bot
+Restart=always
+RestartSec=30

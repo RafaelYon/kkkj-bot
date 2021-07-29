@@ -1,4 +1,12 @@
 ---
+- name: Stop systemd kkkjbot.service
+  become: true
+  command: systemctl stop kkkjbot.service
+
 - name: Get Lastest executable
   become: true
   command: /usr/bin/download_release.sh
+
+- name: Start systemd kkkjbot.service
+  become: true
+  command: systemctl start kkkjbot.service
