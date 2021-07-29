@@ -8,6 +8,7 @@ import (
 
 	"strings"
 
+	"github.com/RafaelYon/kkkj-bot/command"
 	"github.com/RafaelYon/kkkj-bot/repository"
 	"github.com/bwmarrin/discordgo"
 	"github.com/joho/godotenv"
@@ -21,10 +22,14 @@ func LoadEnv() {
 	}
 }
 
+var (
+	devRepository *repository.Dev
+)
+
 func main() {
 	LoadEnv()
 
-	devRepository := &repository.Dev{}
+	devRepository = &repository.Dev{}
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
@@ -66,7 +71,7 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 	}
 	// If the message is "ping" reply with "Pong!"
 	if strings.HasPrefix(m.Content, ";points") {
-		s.ChannelMessageSend(m.ChannelID, "Pong!")
+		command.ContabilizePoints(m.Content, devRepository)
 	}
 
 	// If the message is "pong" reply with "Ping!"
