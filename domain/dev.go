@@ -1,17 +1,17 @@
 package domain
 
 type Dev struct {
-	Name    string
-	Ammount int
+	Name   string
+	Amount int
 }
 
-func (dev *Dev) NewDev(name string) *Dev {
+func NewDev(name string) *Dev {
 	return &Dev{
-		Name:    name,
-		Ammount: 0,
+		Name:   name,
+		Amount: 0,
 	}
 }
 
-func (dev *Dev) Add(ammount int) {
-	dev.Ammount += ammount
+func (dev *Dev) Add(amount int) {
+	dev.Amount += amount
 }
