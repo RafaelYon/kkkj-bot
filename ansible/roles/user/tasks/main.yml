@@ -1,0 +1,7 @@
+---
+- name: create bot run user
+  become: true
+  user:
+    name: bot
+    comment: The bot runner user
+    create_home: true
