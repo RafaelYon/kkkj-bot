@@ -26,12 +26,13 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "web" {
-  ami                    = data.aws_ami.ubuntu.id
-  instance_type          = var.ec2_type
-  iam_instance_profile   = aws_iam_instance_profile.ec2.name
-  key_name               = var.ec2_key_pair
-  vpc_security_group_ids = [data.aws_security_group.default.id]
-  monitoring             = false
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.ec2_type
+  iam_instance_profile        = aws_iam_instance_profile.ec2.name
+  key_name                    = var.ec2_key_pair
+  vpc_security_group_ids      = [data.aws_security_group.default.id]
+  monitoring                  = false
+  associate_public_ip_address = true
 
   root_block_device {
     delete_on_termination = true
