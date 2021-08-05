@@ -22,5 +22,8 @@ P I N G
 🏳️‍🌈 ;oh dad
 STOP
 --------------------------------------------
+🛠️ ;staging
+Adiciona mais um na quantidade de vezes que recriamos a staging
+--------------------------------------------
 `+"```")
 }

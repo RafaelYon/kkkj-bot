@@ -23,13 +23,15 @@ func LoadEnv() {
 }
 
 var (
-	devRepository *repository.Dev
+	devRepository     *repository.Dev
+	stagingRepository *repository.Staging
 )
 
 func main() {
 	LoadEnv()
 
 	devRepository = &repository.Dev{}
+	stagingRepository = repository.NewStagingRepository()
 
 	// Create a new Discord session using the provided bot token.
 	dg, err := discordgo.New("Bot " + os.Getenv("BOT_TOKEN"))
@@ -85,6 +87,10 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 	if strings.HasPrefix(m.Content, ";help") {
 		command.Help(s, m)
+	}
+
+	if strings.HasPrefix(m.Content, ";staging") {
+		command.Staging(stagingRepository, s, m)
 	}
 
 	// If the message is "pong" reply with "Ping!"
