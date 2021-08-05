@@ -83,8 +83,12 @@ func messageCreate(s *discordgo.Session, m *discordgo.MessageCreate) {
 		s.ChannelMessageSend(m.ChannelID, "STOP 👉👈")
 	}
 
+	if strings.HasPrefix(m.Content, ";help") {
+		command.Help(s, m)
+	}
+
 	// If the message is "pong" reply with "Ping!"
-	if m.Content == "pong" {
+	if m.Content == ";pong" {
 		s.ChannelMessageSend(m.ChannelID, "Ping!")
 	}
 }
