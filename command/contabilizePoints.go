@@ -7,6 +7,7 @@ import (
 
 	"github.com/RafaelYon/kkkj-bot/domain"
 	"github.com/RafaelYon/kkkj-bot/repository"
+	"github.com/bwmarrin/discordgo"
 )
 
 type MessagePointsDTO struct {
@@ -14,8 +15,12 @@ type MessagePointsDTO struct {
 	Amount int
 }
 
-func NewMessagePointsDTO(message string) *MessagePointsDTO {
+func NewMessagePointsDTO(message string) (*MessagePointsDTO, error) {
 	temp := strings.Split(message, " ")
+
+	if len(temp) < 3 {
+		return nil, fmt.Errorf("BURRO BURRO BURRO")
+	}
 
 	amount, err := strconv.Atoi(temp[2])
 
@@ -27,11 +32,15 @@ func NewMessagePointsDTO(message string) *MessagePointsDTO {
 	return &MessagePointsDTO{
 		Name:   temp[1],
 		Amount: amount,
-	}
+	}, nil
 }
 
-func ContabilizePoints(message string, devRepository repository.DevSaveRetriver) {
-	messageDTO := NewMessagePointsDTO(message)
+func ContabilizePoints(s *discordgo.Session, m *discordgo.MessageCreate, devRepository repository.DevSaveRetriver) error {
+	messageDTO, err := NewMessagePointsDTO(m.Content)
+	if err != nil {
+		s.ChannelMessageSend(m.ChannelID, err.Error())
+		return err
+	}
 
 	dev, err := devRepository.Get(messageDTO.Name)
 
@@ -42,4 +51,5 @@ func ContabilizePoints(message string, devRepository repository.DevSaveRetriver)
 	dev.Add(messageDTO.Amount)
 
 	devRepository.Save(dev)
+	return nil
 }
