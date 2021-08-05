@@ -6,4 +6,4 @@ User=bot
 WorkingDirectory=/home/bot/kkkj
 ExecStart=/home/bot/kkkj/bot
 Restart=always
-RestartSec=30
+RestartSec=5
